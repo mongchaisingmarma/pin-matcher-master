@@ -43,7 +43,7 @@
                             </div>
                             <div>
                                 <button id="submit-button" type="submit" class="submit-btn">Submit</button>
-                                <p class="action-left">3 try left</p>
+                                <p class="action-left"><span id="try-count">3</span> try left</p>
                             </div>
                     </div>
                 </div>
@@ -62,6 +62,7 @@
             const generateValue = document.getElementById("generate-value");
             generateValue.value = output;
         });
+
         const zeroNumber = screenOutput("zero");
         const oneNumber = screenOutput("one");
         const twoNumber = screenOutput("two");
@@ -74,7 +75,6 @@
         const nineNumber = screenOutput("nine");
         const clearNumber = screenOutput("clear");
 
-
         function screenOutput(id) {
             document.getElementById(id).addEventListener("click", function (event) {
                 const screenValue = document.getElementById("screen-value");
@@ -84,12 +84,14 @@
                 }
             });
         }
+
         document.getElementById("remove").addEventListener("click", function () {
             const screenValue = document.getElementById("screen-value");
             const update = screenValue.value.substr(0, screenValue.value.length - 1);
             screenValue.value = update;
 
         });
+
         document.getElementById("submit-button").addEventListener("click", function () {
             const screenValue = document.getElementById("screen-value").value;
             const generateValue = document.getElementById("generate-value").value;
@@ -100,8 +102,15 @@
                 const wrongMatching = document.getElementById("wrong-matching");
                 wrongMatching.style.display = "block";
             }
+            getTryCount("try-count");
         });
-
+        
+        function getTryCount(id) {
+            const tryCount = document.getElementById("try-count").innerText;
+            const tryCountNumber = parseFloat(tryCount);
+            const updateTryCount = tryCountNumber - 1;
+            document.getElementById("try-count").innerText = updateTryCount;
+        }
     </script>
 
 </body>
